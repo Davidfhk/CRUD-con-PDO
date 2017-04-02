@@ -1,0 +1,8 @@
+#form{
+	text-align: center;
+	border: 1px solid blue;
+	background-color: #1BD0EB;
+}
+tr,td{
+	border: 1px solid blue;
+}
