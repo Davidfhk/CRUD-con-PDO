@@ -2,10 +2,10 @@
 return [
 	"db" =>[
 			'host'=>'localhost',
-			'dbname'=>'pildoras_informaticas',
+			'dbname'=>'crud_pdo',
 			'user'=>'root',
 			'pass'=>'',
 			'charset'=>'utf8',
-			'url' => '/david/php_pildoras_informaticas/crud/'
+			'url' => '/crud_pdo/'
 			]
 ];
