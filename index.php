@@ -35,7 +35,10 @@
 				<td><?=$persona->apellido?></td>
 				<td><?=$persona->direccion?></td>
 				<td><a href="delete.php?id=<?=$persona->id ?>"><input type="button" name="del" value="borrar"></a></td>
-				<td><input type="button" name="act" value="actualizar"></td>
+				<td><a href="edit.php?id=<?=$persona->id ?>
+					 & nom=<?=$persona->nombre ?>
+					 & apell=<?=$persona->apellido ?>
+					 & direc=<?=$persona->direccion ?>"><input type="button" name="act" value="actualizar"></a></td>
 		</tr>
 			<?php endforeach ?>
 		<form action="insert.php" method="POST">
