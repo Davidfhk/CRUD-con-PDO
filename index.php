@@ -9,11 +9,40 @@
 	<?php
 	//Requerimos la conexion a la bbdd
 		require "conexion.php";
+	// ------------------------------Paginación---------------------------------------------
+
+
+		// almacenamos cuantos registros queremos mostrar por página
+	$tamagno_paginas = 3;
+	// la página en la que estamos al cargar la página (cuando carguemos la página quero que me muestre la pagina 1)
+	$pagina = 1;
+	
+	if (isset($_GET['page'])) {
+		$page_user = $_GET['page'];
+		$empezar_desde = ($page_user-1)*$tamagno_paginas;
+	}else{
+		$empezar_desde = ($pagina-1)*$tamagno_paginas;
+	}
+	
+
+	// Esta consulta la hacemos para saber cuantos registros hay en dicha consulta
+	$sql_total = "SELECT * FROM datos_usuarios";
+	$resultado = $pdo->prepare($sql_total);
+	$resultado->execute(array());
+
+	// almacenamos cuantas filas nos devuelve la consulta sql
+	$num_filas = $resultado->rowCount();
+
+	// paginas que tendremos, teniendo en cuenta los registros de cada pagina (tamagno_paginas)
+	$total_paginas = ceil($num_filas/$tamagno_paginas);
+
+	// --------------------------------------------------------------------------------------------
+
 	//creamos un resource en $conexion con la consulta
-		$conexion = $pdo->query("SELECT * FROM datos_usuarios");
+		$conexion = $pdo->query("SELECT * FROM datos_usuarios LIMIT $empezar_desde,$tamagno_paginas");
 	//almacenamos en $registro un array de objetos, y asi luego poder usar sus propiedades
 		$registro = $conexion->fetchAll(PDO::FETCH_OBJ);
-		// var_dump($registro);
+		
 		echo "<br>";
 	?>
 	<table id="form">
@@ -51,5 +80,11 @@
 		</tr>
 		</form>
 	</table>
+	<?php for ($i=$pagina; $i<=$total_paginas; $i++): ?>
+	
+		<a href="?page=<?=$i?>"><?=$i?></a>
+	
+	
+	<?php endfor; ?>
 </body>
 </html>
